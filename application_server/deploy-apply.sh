@@ -10,29 +10,29 @@ sudo apt-get upgrade
 sudo apt-get install python3.8
 
 echo "Initializing venv"
-python3.7 -m venv /etc/oc-pizza/venv
+python3.7 -m venv /etc/ocpizza/venv
 
 echo "Activate venv"
-source /etc/oc-pizza/bin/activate
+source /etc/ocpizza/bin/activate
 
 echo "Installing requirements"
-pip install -r /etc/oc-pizza/requirements.txt
+pip install -r /etc/ocpizza/requirements.txt
 
 echo "Installing supervisor"
 sudo apt-get install supervisor
 
 echo "Writing supervisor conf file"
 echo "[program:ocpizza-gunicorn]
-command = /etc/oc-pizza/venv/bin/newrelic-admin run-program /etc/oc-pizza/venv/bin/gunicorn ocpizza.wsgi
+command = /etc/ocpizza/venv/bin/newrelic-admin run-program /etc/ocpizza/venv/bin/gunicorn ocpizza.wsgi
 user = $USER
-directory = /etc/oc-pizza/
+directory = /etc/ocpizza/
 autostart = true
 autorestart = true
-environment = NEW_RELIC_CONFIG_FILE='/etc/oc-pizza/newrelic.ini',SQL_PASSWORD=\"$SQL_PASSWORD\",SECRET_KEY=\"$CLIENT_SECRET_KEY\",DJANGO_SETTINGS_MODULE='settings.production',HOST=$HOST, PATH=$PATH:/etc/oc-pizza/venv
+environment = NEW_RELIC_CONFIG_FILE='/etc/ocpizza/newrelic.ini',SQL_PASSWORD=\"$SQL_PASSWORD\",SECRET_KEY=\"$CLIENT_SECRET_KEY\",DJANGO_SETTINGS_MODULE='settings.production',HOST=$HOST, PATH=$PATH:/etc/ocpizza/venv
 stderr_events_enabled = true
 redirect_stderr = true
-stdout_logfile = /etc/oc-pizza/logs/gunicorn.log
-stderr_logfile = /etc/oc-pizza/logs/gunicorn_err.log" > /etc/supervisor/conf.d/ocpizza-gunicorn.conf
+stdout_logfile = /etc/ocpizza/logs/gunicorn.log
+stderr_logfile = /etc/ocpizza/logs/gunicorn_err.log" > /etc/supervisor/conf.d/ocpizza-gunicorn.conf
 
 echo "Launching supervisor"
 sudo supervisorctl update

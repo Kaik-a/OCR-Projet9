@@ -12,15 +12,15 @@ sudo apt install python-certbot-nginx
 echo "Creating conf for nginx"
 echo "
 server {
-        server_name pur-beurre-mbi.site www.pur-beurre-mbi.site;
-        root /etc/oc-pizza;
+        server_name $DOMAIN_NAME_1 $DOMAIN_NAME_2;
+        root /etc/ocpizza;
 
         location /staticfiles {
-                alias /etc/oc-pizza/staticfiles/;
+                alias /etc/ocpizza/staticfiles/;
         }
 
         location /static {
-                alias /etc/oc-pizza/staticfiles/;
+                alias /etc/ocpizza/staticfiles/;
 }
         location / {
                 proxy_set_header Host \$http_host;

@@ -14,4 +14,4 @@ mysql -u "$USER" -p"$PASSWORD" -e "GRANT RELOAD, PROCESS, REPLICATION CLIENT ON 
 mysql -u "$USER" -p"$PASSWORD" -e "FLUSH PRIVILEGES;"
 
 echo "Create hour-to-hour backup job"
-(crontab -l ; echo "00 * * * * /etc/oc-pizza/backup.sh $SAVE_USER $SAVE_PASSWORD $SAVE_DIRECTORY >> /etc/oc-pizza/logs/backup.log 2>&1") | crontab
+(crontab -l ; echo "00 * * * * /etc/ocpizza/backup.sh $SAVE_USER $SAVE_PASSWORD $SAVE_DIRECTORY >> /etc/ocpizza/logs/backup.log 2>&1") | crontab
